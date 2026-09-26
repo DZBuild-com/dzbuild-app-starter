@@ -1,0 +1,15 @@
+{
+  "name": "dzbuild-app-starter",
+  "version": "1.0.0",
+  "description": "A complete DZBuild app in Node.js: OAuth install with PKCE, one token per store, signed webhooks and the launch link.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  }
+}
