@@ -17,7 +17,7 @@ creates the D1 database and deploys it on a free `workers.dev` URL.
 | Preset | What it does | Deploy | Needs a domain you own? |
 |---|---|---|---|
 | [`cloudflare-basic`](cloudflare-basic/) | Install flow, tokens in D1, launch link, signed webhook endpoint. The base for your own app. | [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/DZBuild-com/dzbuild-app-starter/tree/main/cloudflare-basic) | No. It registers no webhook. |
-| `cloudflare-catalog` | Lists the store's products and exports them as CSV. | coming | No. |
+| [`cloudflare-catalog`](cloudflare-catalog/) | Lists the store's products and exports them as CSV. | [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/DZBuild-com/dzbuild-app-starter/tree/main/cloudflare-catalog) | No. |
 | `cloudflare-orders` | Notices new orders (polling by default) and sends Telegram alerts; order webhooks once you have a domain. | coming | Only for webhooks: the DZBuild console refuses `workers.dev` webhook URLs. Polling works everywhere. |
 
 After the deploy, apply the D1 migration once, set the two secrets and register the app in the
@@ -30,6 +30,8 @@ README lists every command.
 npm create cloudflare@latest my-app -- --template DZBuild-com/dzbuild-app-starter/cloudflare-basic -y --no-deploy --no-open
 cd my-app && npm test
 ```
+
+For the products preset, pass `--template DZBuild-com/dzbuild-app-starter/cloudflare-catalog` instead.
 
 ## 3. Run the Node example
 
