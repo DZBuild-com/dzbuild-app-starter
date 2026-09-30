@@ -9,7 +9,7 @@ The app talks to the store through the REST API at https://api.dzbuild.app/v1 an
 - Index of the developer docs, one line per page: https://dzbuild.dev/llms.txt
 - Any page as Markdown: its URL plus `.md`, for example https://dzbuild.dev/webhooks.md
 - The rules in one file: https://dzbuild.dev/skills/dzbuild-apps/SKILL.md
-- OpenAPI 3.1 description of every `/v1` operation: https://dzbuild.dev/openapi/dzbuild-v1.json
+- OpenAPI 3.1 description of every operation an install token can call: https://dzbuild.dev/openapi/dzbuild-apps-v1.json
 
 Read the page for the part you are changing before you change it. Do not infer DZBuild behaviour from
 general OAuth or webhook knowledge; several details differ (no refresh tokens, `Idempotency-Key` on every
