@@ -29,6 +29,8 @@ write, one token per store).
 - Back off on `429` using `error.retry_after`, then resend with the same `Idempotency-Key`.
 - On `app.uninstalled`, drop the store's token and delete its data within 30 days.
 - Store one token per `store_id`; a token never reaches another store.
+- Send a `User-Agent` header on every request to DZBuild (token exchange and API); the edge challenges
+  a `POST` without one.
 
 ## Environment variables
 
