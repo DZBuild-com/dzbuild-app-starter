@@ -5,6 +5,8 @@
 export const AUTHORIZE_URL = 'https://dzbuild.com/oauth/apps/authorize';
 export const TOKEN_URL = 'https://dzbuild.com/oauth/apps/token';
 export const API_BASE = 'https://api.dzbuild.app/v1';
+// Workers fetch sends no User-Agent, and the dzbuild.com edge challenges a POST that has none.
+const USER_AGENT = 'dzbuild-app/1.0 (+https://dzbuild.dev)';
 
 const WRITE_METHODS = new Set(['POST', 'PATCH', 'DELETE']);
 const IDEMPOTENCY_KEY = /^[A-Za-z0-9_\-:.]{1,64}$/;
@@ -114,7 +116,7 @@ export async function exchangeCode(
 ): Promise<TokenResponse> {
   const res = await fetchImpl(TOKEN_URL, {
     method: 'POST',
-    headers: { 'content-type': 'application/x-www-form-urlencoded', accept: 'application/json' },
+    headers: { 'content-type': 'application/x-www-form-urlencoded', accept: 'application/json', 'user-agent': USER_AGENT },
     body: new URLSearchParams({
       grant_type: 'authorization_code',
       code: p.code,
@@ -160,7 +162,7 @@ export async function verifyLaunchToken(jwt: string | null, secret: string, clie
 
 // One call to https://api.dzbuild.app/v1. Writes need an idempotencyKey; reuse it on every retry.
 export async function api<T = unknown>(fetchImpl: typeof fetch, token: string, method: string, path: string, body?: unknown, idempotencyKey?: string): Promise<T> {
-  const headers: Record<string, string> = { authorization: `Bearer ${token}`, accept: 'application/json' };
+  const headers: Record<string, string> = { authorization: `Bearer ${token}`, accept: 'application/json', 'user-agent': USER_AGENT };
   if (WRITE_METHODS.has(method)) {
     const key = idempotencyKey ?? '';
     if (!IDEMPOTENCY_KEY.test(key)) {

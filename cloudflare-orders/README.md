@@ -39,6 +39,8 @@ The budget is one API request per store per minute, inside the 120 per minute of
 token, and at most 45 outbound requests per run, inside the free plan's 50 subrequests per
 invocation.
 
+Every request to DZBuild carries a User-Agent; DZBuild's edge challenges POSTs without one.
+
 ## Deploy it
 
 Three ways in; each ends with a Worker on `https://<name>.<account>.workers.dev`.

@@ -74,6 +74,13 @@ describe('exchangeCode', () => {
     expect(body.get('client_secret')).toBe('dzas_x');
   });
 
+  it('sends the User-Agent the dzbuild.com edge requires on a POST', async () => {
+    let seen: RequestInit | undefined;
+    const fetchImpl: typeof fetch = async (_url, init) => { seen = init; return jsonResponse(200, {}); };
+    await exchangeCode(fetchImpl, params);
+    expect(new Headers(seen!.headers).get('user-agent')).toBe('dzbuild-app/1.0 (+https://dzbuild.dev)');
+  });
+
   it('turns an OAuth error into DZBuildError', async () => {
     const fetchImpl: typeof fetch = async () => jsonResponse(400, { error: 'invalid_grant', error_description: 'code used' });
     await expect(exchangeCode(fetchImpl, params)).rejects.toMatchObject({ status: 400, code: 'invalid_grant' });
@@ -143,6 +150,14 @@ describe('api', () => {
   it('reads retry_after from a 429 envelope', async () => {
     const fetchImpl: typeof fetch = async () => jsonResponse(429, { error: { code: 'rate_limited', message: 'slow down', retry_after: 7 } });
     await expect(api(fetchImpl, 'tok', 'GET', '/orders')).rejects.toMatchObject({ status: 429, retryAfter: 7 });
+  });
+
+  it('sends the User-Agent on reads and writes', async () => {
+    const agents: (string | null)[] = [];
+    const capture: typeof fetch = async (_url, init) => { agents.push(new Headers(init!.headers).get('user-agent')); return jsonResponse(200, { data: {} }); };
+    await api(capture, 'tok', 'GET', '/whoami');
+    await api(capture, 'tok', 'POST', '/orders', {}, 'job-43');
+    expect(agents).toEqual(['dzbuild-app/1.0 (+https://dzbuild.dev)', 'dzbuild-app/1.0 (+https://dzbuild.dev)']);
   });
 
   it('refuses a write without an Idempotency-Key and sends it when given', async () => {
