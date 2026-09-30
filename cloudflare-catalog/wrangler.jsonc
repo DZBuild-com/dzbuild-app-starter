@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dzbuild-app-catalog",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-26",
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  // DZBUILD_CLIENT_SECRET and DZBUILD_SIGNING_SECRET are secrets: `npx wrangler secret put <NAME>`, never here.
+  "vars": {
+    "DZBUILD_CLIENT_ID": "dzapp_replace_me",
+    "DZBUILD_SCOPES": "products:read"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dzbuild_app",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
