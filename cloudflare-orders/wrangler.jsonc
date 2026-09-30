@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dzbuild-app-orders",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-26",
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  // Polls new orders once a minute; the cron runs scheduled() in src/poll.ts.
+  "triggers": { "crons": ["* * * * *"] },
+  // DZBUILD_CLIENT_SECRET, DZBUILD_SIGNING_SECRET and TELEGRAM_BOT_TOKEN are secrets: `npx wrangler secret put <NAME>`, never here.
+  "vars": {
+    "DZBUILD_CLIENT_ID": "dzapp_replace_me",
+    "DZBUILD_SCOPES": "orders:read",
+    "WEBHOOKS": "off",
+    "TELEGRAM_CHAT_ID": ""
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dzbuild_app",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

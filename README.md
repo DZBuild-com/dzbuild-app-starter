@@ -17,10 +17,10 @@ creates the D1 database and deploys it on a free `workers.dev` URL.
 | Preset | What it does | Deploy | Needs a domain you own? |
 |---|---|---|---|
 | [`cloudflare-basic`](cloudflare-basic/) | Install flow, tokens in D1, launch link, signed webhook endpoint. The base for your own app. | [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/DZBuild-com/dzbuild-app-starter/tree/main/cloudflare-basic) | No. It registers no webhook. |
-| `cloudflare-catalog` | Lists the store's products and exports them as CSV. | coming | No. |
-| `cloudflare-orders` | Notices new orders (polling by default) and sends Telegram alerts; order webhooks once you have a domain. | coming | Only for webhooks: the DZBuild console refuses `workers.dev` webhook URLs. Polling works everywhere. |
+| [`cloudflare-catalog`](cloudflare-catalog/) | Lists the store's products and exports them as CSV. | [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/DZBuild-com/dzbuild-app-starter/tree/main/cloudflare-catalog) | No. |
+| [`cloudflare-orders`](cloudflare-orders/) | Polls new orders every minute and sends one Telegram message per order; order webhooks once you have a domain. | [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/DZBuild-com/dzbuild-app-starter/tree/main/cloudflare-orders) | No for polling, yes for webhooks: the DZBuild console refuses `workers.dev` webhook URLs. |
 
-After the deploy, apply the D1 migration once, set the two secrets and register the app in the
+After the deploy, apply the D1 migrations once, set the secrets and register the app in the
 [developer console](https://dzbuild.com/dashboard/developer) with your Worker's URL. The preset
 README lists every command.
 
@@ -30,6 +30,9 @@ README lists every command.
 npm create cloudflare@latest my-app -- --template DZBuild-com/dzbuild-app-starter/cloudflare-basic -y --no-deploy --no-open
 cd my-app && npm test
 ```
+
+For the products preset, pass `--template DZBuild-com/dzbuild-app-starter/cloudflare-catalog` instead.
+Replace `cloudflare-basic` with `cloudflare-orders` for the orders preset.
 
 ## 3. Run the Node example
 
