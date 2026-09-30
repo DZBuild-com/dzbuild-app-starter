@@ -1,0 +1,77 @@
+{
+  "kit_version": "2026.09.30-test",
+  "openapi_info_version": "1.8",
+  "docs": [
+    {
+      "id": "oauth",
+      "locale": "en",
+      "title": "OAuth install flow",
+      "description": "An app gets access to a store through the OAuth 2.0 authorization code flow with PKCE.",
+      "url": "https://dzbuild.dev/oauth",
+      "md_url": "https://dzbuild.dev/oauth.md",
+      "headings": ["Endpoints", "Token errors"],
+      "text": "An app gets access to a store through the OAuth 2.0 authorization code flow with PKCE. Your server creates a code_verifier and its S256 challenge. Signed webhooks are covered on their own page."
+    },
+    {
+      "id": "webhooks",
+      "locale": "en",
+      "title": "Webhooks",
+      "description": "DZBuild sends an HTTPS POST to your app's webhook URL.",
+      "url": "https://dzbuild.dev/webhooks",
+      "md_url": "https://dzbuild.dev/webhooks.md",
+      "headings": ["Signature", "Retries and dead-lettering"],
+      "text": "Every request is signed. Check X-DZ-Signature over the raw body before acting on it. Retries happen after 60 s, 300 s, 1800 s and 7200 s."
+    },
+    {
+      "id": "oauth",
+      "locale": "ar",
+      "title": "تدفق تثبيت OAuth",
+      "description": "يحصل التطبيق على الوصول إلى المتجر عبر تدفق OAuth 2.0 مع PKCE.",
+      "url": "https://dzbuild.dev/ar/oauth",
+      "md_url": "https://dzbuild.dev/ar/oauth.md",
+      "headings": ["نقاط النهاية"],
+      "text": "يحصل التطبيق على الوصول إلى المتجر عبر تدفق رمز التفويض OAuth 2.0 مع PKCE. يوافق التاجر على تطبيقك في شاشة الموافقة."
+    },
+    {
+      "id": "oauth",
+      "locale": "fr",
+      "title": "Flux d'installation OAuth",
+      "description": "Une application obtient l'accès à une boutique par le flux OAuth 2.0 avec PKCE.",
+      "url": "https://dzbuild.dev/fr/oauth",
+      "md_url": "https://dzbuild.dev/fr/oauth.md",
+      "headings": ["Points de terminaison"],
+      "text": "Une application obtient l'accès à une boutique par le flux de code d'autorisation OAuth 2.0 avec PKCE. Le marchand approuve votre application sur un écran de consentement éphémère."
+    },
+    {
+      "id": "outside",
+      "locale": "en",
+      "title": "Outside page",
+      "description": "A page whose Markdown twin is not on dzbuild.dev.",
+      "url": "https://example.org/outside",
+      "md_url": "https://example.org/outside.md",
+      "headings": [],
+      "text": "This entry exists so the loader test can prove that only dzbuild.dev Markdown is ever fetched."
+    }
+  ],
+  "api": [
+    {
+      "operationId": "whoami",
+      "method": "GET",
+      "path": "/v1/whoami",
+      "summary": "Describe the calling key",
+      "description": "Returns the store, the scopes and, for an install token, the app object.",
+      "scopes": [],
+      "url": "https://dzbuild.dev/api-reference#whoami"
+    }
+  ],
+  "examples": [
+    {
+      "id": "first-call-whoami",
+      "title": "Make your first call",
+      "description": "Call GET /v1/whoami with an install token.",
+      "language": "bash",
+      "code": "curl -s https://api.dzbuild.app/v1/whoami -H \"Authorization: Bearer $DZ_TOKEN\"",
+      "url": "https://dzbuild.dev/getting-started#5-make-your-first-call"
+    }
+  ]
+}
