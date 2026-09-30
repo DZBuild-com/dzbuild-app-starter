@@ -20,6 +20,8 @@ Hono routes the requests, `src/dzbuild.ts` holds the DZBuild contract, D1 holds 
 Redirect, launch and webhook URLs derive from the request origin, so the same code runs on
 `workers.dev` and on a domain of your own.
 
+Every request to DZBuild carries a User-Agent; DZBuild's edge challenges POSTs without one.
+
 The export is built in memory before the response starts, so a failed page (a revoked token, a
 missing scope, a `429`) answers the error page with DZBuild's message rather than a file that ends
 short. One invocation may make 50 outbound requests on the free Workers plan (1,000 on the paid

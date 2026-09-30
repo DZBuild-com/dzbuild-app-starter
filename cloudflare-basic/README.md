@@ -19,6 +19,8 @@ developer console, install it on your own store, then build your feature on top.
 Redirect, launch and webhook URLs derive from the request origin, so the same code runs on
 `workers.dev` and on a domain of your own.
 
+Every request to DZBuild carries a User-Agent; DZBuild's edge challenges POSTs without one.
+
 ## Deploy it
 
 Three ways in; each ends with a Worker on `https://<name>.<account>.workers.dev`.
