@@ -1,0 +1,3 @@
+# Copy to .dev.vars for `npm run dev`. Production uses `npx wrangler secret put <NAME>`.
+DZBUILD_CLIENT_SECRET=dzas_replace_me
+DZBUILD_SIGNING_SECRET=replace_me_64_hex
