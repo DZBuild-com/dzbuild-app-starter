@@ -1,0 +1,39 @@
+{
+  "name": "@dzbuild/docs-mcp",
+  "version": "0.1.0",
+  "description": "MCP server that gives coding agents the DZBuild developer docs, API operations and examples over stdio.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DZBuild-com/dzbuild-app-starter.git",
+    "directory": "packages/docs-mcp"
+  },
+  "homepage": "https://dzbuild.dev/agents/connect",
+  "bin": {
+    "dzbuild-docs-mcp": "dist/src/cli.js"
+  },
+  "files": [
+    "dist/src",
+    "data",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "npm run build && node --test dist/test/*.test.js",
+    "fetch-index": "node scripts/fetch-index.mjs",
+    "prepublishOnly": "npm test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.31.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.0",
+    "typescript": "5.9.3"
+  }
+}
